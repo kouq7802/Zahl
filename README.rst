@@ -17,4 +17,4 @@ Open in terminal this repository and type below.
 
 .. code-block:: bash
         
-        $ ./RepeatingDecimal.py <denominator> <numarator>
+        $ ./RepeatingDecimal.py <denominator> <numerator>
