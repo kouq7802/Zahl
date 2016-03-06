@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
 '''
 Author: KouQ7802
 Created on Wednesday, January 20th, 2016
+Last modified : Monday, March 7th, 2016
 '''
 
 ## import required libraries
 import sys
 
 ## define functions
-def read_param():
+def read_param(index):
     ERROR_MESSAGE = '[Error] Program aborted!!\nPlease enter Natural Number'
     try:
-        n = int(eval(sys.argv[1]))
+        n = int(eval(sys.argv[index]))
         if n >= 0:
             return n
         else:
@@ -29,9 +30,9 @@ def read_param():
         print(ERROR_MESSAGE)
         sys.exit()
 
-def find_recurring_cycle(n):
-    rabbit = 1
-    turtle = 1
+def find_recurring_cycle(n, dividend):
+    rabbit = dividend
+    turtle = dividend
     s = 0
     g = 0
 
@@ -45,7 +46,7 @@ def find_recurring_cycle(n):
             continue
 
     if rabbit != 0:
-        rabbit = 1
+        rabbit = dividend
         s = 1
         while turtle != rabbit:
             s += 1
@@ -62,8 +63,14 @@ def find_recurring_cycle(n):
     return {'n':n, 'startpoint':s, 'endpoint':g}
 
 def main():
-    n = read_param()
-    result = find_recurring_cycle(n)
+    n = read_param(1)
+    try:
+        dividend = read_param(2)
+    except IndexError:
+        dividend = 1
+    while dividend > n:
+        dividend -= n
+    result = find_recurring_cycle(n, dividend)
     print('='*36+'[RESULT]'+'='*36)
     print(' 1 /', n)
     print('-'*80)
